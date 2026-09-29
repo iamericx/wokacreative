@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f4f1e9">
+  <meta name="description" content="Get in touch with Eric Kweka about brand identity and web design projects.">
+  <title>Contact — Eric Kweka</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header"><a class="wordmark" href="index.html" aria-label="Eric Kweka, home"><span class="wordmark-mark">E<span>K</span></span><span>Eric Kweka<small>Independent designer</small></span></a><button class="menu-btn" aria-expanded="false" aria-controls="site-nav"><span>Menu</span><i></i><i></i></button><nav class="site-nav" id="site-nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="graphics.html">Graphics</a><a class="nav-contact" href="contact.html" aria-current="page">Let’s talk <span>↗</span></a></nav></header>
+  <main class="wrap inner-page contact-page">
+    <section class="page-intro contact-intro"><p class="eyebrow"><span class="status-dot"></span> OPEN FOR SELECT PROJECTS</p><h1>Have a good<br>feeling about <em>this?</em></h1><p class="page-lede">Tell me a little about what you’re working on. A rough idea is more than enough to start a conversation.</p></section>
+    <section class="contact-layout"><div class="contact-aside"><span class="eyebrow">THE HUMAN BIT</span><p>Whether you have a clear brief or just a first thought, I’d love to hear about it.</p><div class="contact-detail"><span>EMAIL</span><a href="mailto:kwekae376@gmail.com">kwekae376@gmail.com <b>↗</b></a></div><div class="contact-detail"><span>BASED IN</span><p>Dar es Salaam, Tanzania</p></div><div class="contact-detail"><span>GOOD FIT FOR</span><p>Brand identity · Web design · Front-end builds</p></div><div class="availability"><span class="status-dot"></span> Currently open for freelance work</div><div class="contact-aside-mark" aria-hidden="true">✳</div></div>
+      <div class="form-panel"><p class="eyebrow">SEND A NOTE <span class="form-step">01 / 01</span></p><form id="contact-form" action="https://formspree.io/f/mbdvykke" method="POST"><div class="form-row"><div class="form-field"><label for="name">YOUR NAME</label><input id="name" name="name" type="text" autocomplete="name" placeholder="Jane Mwangi" required></div><div class="form-field"><label for="email">YOUR EMAIL</label><input id="email" name="_replyto" type="email" autocomplete="email" placeholder="jane@example.com" required></div></div><div class="form-field"><label for="message">WHAT’S ON YOUR MIND?</label><textarea id="message" name="message" rows="5" placeholder="A little about the project, the idea, or what you need..." required></textarea></div><div class="form-honeypot" aria-hidden="true"><label for="website">Leave this field empty</label><input id="website" type="text" name="_gotcha" tabindex="-1" autocomplete="off"></div><button class="button button-dark submit-button" type="submit"><span>Send your message</span><span>↗</span></button><p class="form-note">Your note goes straight to my inbox. I usually reply within 1–2 business days.</p><p id="form-status" class="form-status" aria-live="polite"></p></form></div></section>
+    <section class="contact-bottom"><span>ASANTE SANA</span><span>✳</span><span>THANK YOU FOR BEING HERE</span></section>
+  </main>
+  <footer class="site-footer wrap"><a class="footer-mark" href="index.html">EK<span>✳</span></a><span>© <span data-year>2026</span> Eric Kweka · Dar es Salaam, Tanzania</span><a href="mailto:kwekae376@gmail.com">SAY HELLO ↗</a></footer>
+  <script src="nav.js" defer></script>
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const status = document.getElementById('form-status');
+      const button = form.querySelector('button[type="submit"]');
+      button.disabled = true;
+      status.className = 'form-status is-visible';
+      status.textContent = 'Sending your message…';
+      try {
+        const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        if (!response.ok) throw new Error('Message could not be sent');
+        status.className = 'form-status is-visible is-success';
+        status.textContent = 'Thanks for reaching out. Your message is on its way.';
+        form.reset();
+      } catch (error) {
+        status.className = 'form-status is-visible is-error';
+        status.textContent = 'Something went wrong. Please try again or email me directly.';
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
